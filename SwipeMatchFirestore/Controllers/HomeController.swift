@@ -8,17 +8,26 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class HomeController: UIViewController {
+    
+    let cardViewModels: [CardViewModel] = {
+        let producers = [
+        User(name: "Corsair", age: 2, profession: "Gaming PC", imageName: "pc1"),
+        User(name: "Main Gear", age: 1, profession: "Editing PC", imageName: "maingearPC"),
+        Advertiser(title: "GTX 2080Ti", brandName: "Nvidia", posterPhotoName: "2080ti")
+        ] as [ProducesCardViewModel]
+        
+        let viewModels = producers.map({return $0.toCardViewModel()})
+        return viewModels
+    }()
+    
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let buttonStackView = HomeBottomControlsStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupLayout()
-        
         setupDummyCards()
     }
 
@@ -37,10 +46,13 @@ class ViewController: UIViewController {
     }
     
     fileprivate func setupDummyCards() {
-        print("Setting up dummy cards")
-        let cardView = CardView()
-        cardsDeckView.addSubview(cardView)
-        cardView.fillSuperview()
+        cardViewModels.forEach { (cardViewModel) in
+            let cardView = CardView()
+            cardView.cardViewModel = cardViewModel
+            
+            cardsDeckView.addSubview(cardView)
+            cardView.fillSuperview()
+        }
     }
 }
 
