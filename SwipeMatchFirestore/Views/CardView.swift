@@ -19,6 +19,9 @@ class CardView: UIView {
     }
     
     fileprivate let imageView = UIImageView(image: #imageLiteral(resourceName: "pc1"))
+    
+    fileprivate let gradientLayer = CAGradientLayer()
+    
     fileprivate let informationLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -32,16 +35,7 @@ class CardView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        layer.cornerRadius = 10
-        clipsToBounds = true
-        
-        imageView.contentMode = .scaleAspectFill
-        addSubview(imageView)
-        imageView.fillSuperview()
-        
-        addSubview(informationLabel)
-        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
-        
+        setupLayout()
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
@@ -51,8 +45,39 @@ class CardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    fileprivate func setupLayout() {
+        layer.cornerRadius = 10
+        clipsToBounds = true
+        
+        imageView.contentMode = .scaleAspectFill
+        addSubview(imageView)
+        imageView.fillSuperview()
+        
+        // Gradient layer
+        setupGradientLayer()
+        
+        addSubview(informationLabel)
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
+    }
+    
+    fileprivate func setupGradientLayer() {
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.5, 1.1]
+        
+        layer.addSublayer(gradientLayer)
+    }
+    
+    override func layoutSubviews() {
+        // Will have card view frame here
+        gradientLayer.frame = self.frame
+    }
+    
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
+        case .began:
+            superview?.subviews.forEach({ (subview) in
+                subview.layer.removeAllAnimations()
+            })
         case .changed:
             handleChanged(gesture)
         case .ended:
