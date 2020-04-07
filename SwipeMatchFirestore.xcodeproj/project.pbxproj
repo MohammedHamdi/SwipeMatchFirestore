@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F15140E243CE3A900261221 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F15140D243CE3A900261221 /* CustomTextField.swift */; };
 		6FA00F532438BDFB00A5B2F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F522438BDFB00A5B2F1 /* AppDelegate.swift */; };
 		6FA00F552438BDFB00A5B2F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F542438BDFB00A5B2F1 /* SceneDelegate.swift */; };
 		6FA00F572438BDFB00A5B2F1 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F562438BDFB00A5B2F1 /* HomeController.swift */; };
@@ -20,9 +21,11 @@
 		6FA00F76243B858600A5B2F1 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F75243B858600A5B2F1 /* CardViewModel.swift */; };
 		6FA00F78243B94F400A5B2F1 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F77243B94F400A5B2F1 /* Advertiser.swift */; };
 		6FA00F7A243B979400A5B2F1 /* Assets.xcassets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FA00F79243B979400A5B2F1 /* Assets.xcassets.xcassets */; };
+		6FA00F7C243CDCEF00A5B2F1 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F7B243CDCEF00A5B2F1 /* RegistrationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F15140D243CE3A900261221 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		6FA00F4F2438BDFB00A5B2F1 /* SwipeMatchFirestore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatchFirestore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FA00F522438BDFB00A5B2F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FA00F542438BDFB00A5B2F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +41,7 @@
 		6FA00F75243B858600A5B2F1 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		6FA00F77243B94F400A5B2F1 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		6FA00F79243B979400A5B2F1 /* Assets.xcassets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.xcassets; sourceTree = "<group>"; };
+		6FA00F7B243CDCEF00A5B2F1 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 				6FA00F6A243A115F00A5B2F1 /* HomeBottomControlsStackView.swift */,
 				6FA00F6C243A163700A5B2F1 /* TopNavigationStackView.swift */,
 				6FA00F6E243A454A00A5B2F1 /* CardView.swift */,
+				6F15140D243CE3A900261221 /* CustomTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -116,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				6FA00F562438BDFB00A5B2F1 /* HomeController.swift */,
+				6FA00F7B243CDCEF00A5B2F1 /* RegistrationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -204,8 +210,10 @@
 				6FA00F572438BDFB00A5B2F1 /* HomeController.swift in Sources */,
 				6FA00F532438BDFB00A5B2F1 /* AppDelegate.swift in Sources */,
 				6FA00F6B243A115F00A5B2F1 /* HomeBottomControlsStackView.swift in Sources */,
+				6FA00F7C243CDCEF00A5B2F1 /* RegistrationController.swift in Sources */,
 				6FA00F72243B5C9C00A5B2F1 /* User.swift in Sources */,
 				6FA00F6D243A163700A5B2F1 /* TopNavigationStackView.swift in Sources */,
+				6F15140E243CE3A900261221 /* CustomTextField.swift in Sources */,
 				6FA00F682438C07A00A5B2F1 /* Extensions+UIView.swift in Sources */,
 				6FA00F552438BDFB00A5B2F1 /* SceneDelegate.swift in Sources */,
 				6FA00F76243B858600A5B2F1 /* CardViewModel.swift in Sources */,
