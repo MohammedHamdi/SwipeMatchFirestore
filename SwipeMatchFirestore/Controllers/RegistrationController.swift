@@ -168,7 +168,6 @@ class RegistrationController: UIViewController {
 //        print(notification.userInfo)
         guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardFrame = value.cgRectValue
-        print(keyboardFrame)
         
         let bottomSpace = view.frame.height - overallStackView.frame.origin.y - overallStackView.frame.height
         
@@ -204,8 +203,6 @@ class RegistrationController: UIViewController {
     
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
-        
-        
         
         registrationViewModel.performRegisteration { [unowned self] (error) in
             if let error = error {
