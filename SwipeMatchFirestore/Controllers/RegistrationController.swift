@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import JGProgressHUD
 
 class RegistrationController: UIViewController {
@@ -99,7 +98,7 @@ class RegistrationController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
+//        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillLayoutSubviews() {
@@ -129,6 +128,16 @@ class RegistrationController: UIViewController {
         
         registrationViewModel.bindableImage.bind { [unowned self] (image) in
             self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        
+        registrationViewModel.bindableIsRegistering.bind { [unowned self] (isRegistering) in
+            guard let isRegistering = isRegistering else { return }
+            if isRegistering {
+                self.registeringHUD.textLabel.text = "Register"
+                self.registeringHUD.show(in: self.view)
+            } else {
+                self.registeringHUD.dismiss()
+            }
         }
     }
     
@@ -191,23 +200,24 @@ class RegistrationController: UIViewController {
         }
     }
     
+    let registeringHUD = JGProgressHUD(style: .dark)
+    
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+        
+        
+        registrationViewModel.performRegisteration { [unowned self] (error) in
             if let error = error {
-                print("Error registering user:", error)
                 self.showHUDWithError(error: error)
                 return
             }
-            
-            print("Successfully registered user:", result?.user.uid ?? "")
+            print("Finished registering user")
         }
     }
     
     fileprivate func showHUDWithError(error: Error) {
+        registeringHUD.dismiss()
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Failed registeration"
         hud.detailTextLabel.text = error.localizedDescription
