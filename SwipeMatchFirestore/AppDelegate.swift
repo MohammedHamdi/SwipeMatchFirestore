@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 13.0, *) {
             
         } else {
+            FirebaseApp.configure()
+            
             window?.makeKeyAndVisible()
             window?.rootViewController = RegistrationController()
         }
