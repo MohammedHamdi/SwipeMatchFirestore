@@ -7,19 +7,21 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeController: UIViewController {
     
-    let cardViewModels: [CardViewModel] = {
-        let producers = [
-        User(name: "Corsair", age: 2, profession: "Gaming PC", imageNames: ["pc1", "pc2", "pc3"]),
-        User(name: "Main Gear", age: 1, profession: "Editing PC", imageNames: ["maingearPC", "maingearPC2"]),
-        Advertiser(title: "GTX 2080Ti", brandName: "Nvidia", posterPhotoName: "2080ti")
-        ] as [ProducesCardViewModel]
-        
-        let viewModels = producers.map({return $0.toCardViewModel()})
-        return viewModels
-    }()
+//    let cardViewModels: [CardViewModel] = {
+//        let producers = [
+//        User(name: "Corsair", age: 2, profession: "Gaming PC", imageNames: ["pc1", "pc2", "pc3"]),
+//        User(name: "Main Gear", age: 1, profession: "Editing PC", imageNames: ["maingearPC", "maingearPC2"]),
+//        Advertiser(title: "GTX 2080Ti", brandName: "Nvidia", posterPhotoName: "2080ti")
+//        ] as [ProducesCardViewModel]
+//
+//        let viewModels = producers.map({return $0.toCardViewModel()})
+//        return viewModels
+//    }()
+    var cardViewModels = [CardViewModel]()
     
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
@@ -32,10 +34,13 @@ class HomeController: UIViewController {
         
         setupLayout()
         setupDummyCards()
+        fetchUsersFromFirestore()
     }
 
     // MARK:- Fileprivate
     fileprivate func setupLayout() {
+        view.backgroundColor = .white
+        
         let overallStackview = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, buttonStackView])
         overallStackview.axis = .vertical
         
@@ -63,6 +68,22 @@ class HomeController: UIViewController {
         let registrationController = RegistrationController()
         registrationController.modalPresentationStyle = .fullScreen
         present(registrationController, animated: true)
+    }
+    
+    fileprivate func fetchUsersFromFirestore() {
+        Firestore.firestore().collection("users").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Failed to fetch users:", error)
+                return
+            }
+            
+            snapshot?.documents.forEach({ (documentSnapshot) in
+                let userDictionary = documentSnapshot.data()
+                let user = User(dictionary: userDictionary)
+                self.cardViewModels.append(user.toCardViewModel())
+            })
+            self.setupDummyCards()
+        }
     }
 }
 
