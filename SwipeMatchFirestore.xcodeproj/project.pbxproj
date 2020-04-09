@@ -12,6 +12,8 @@
 		6F151410243E011C00261221 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F15140F243E011C00261221 /* RegistrationViewModel.swift */; };
 		6F4CA499243E1F5000A54EFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F4CA498243E1F5000A54EFC /* GoogleService-Info.plist */; };
 		6F4CA49B243E28F400A54EFC /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA49A243E28F400A54EFC /* Bindable.swift */; };
+		6F4CA49D243F8ED100A54EFC /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA49C243F8ED100A54EFC /* SettingsController.swift */; };
+		6F4CA49F243FA04200A54EFC /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA49E243FA04200A54EFC /* SettingsCell.swift */; };
 		6FA00F532438BDFB00A5B2F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F522438BDFB00A5B2F1 /* AppDelegate.swift */; };
 		6FA00F552438BDFB00A5B2F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F542438BDFB00A5B2F1 /* SceneDelegate.swift */; };
 		6FA00F572438BDFB00A5B2F1 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F562438BDFB00A5B2F1 /* HomeController.swift */; };
@@ -34,6 +36,8 @@
 		6F15140F243E011C00261221 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		6F4CA498243E1F5000A54EFC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6F4CA49A243E28F400A54EFC /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
+		6F4CA49C243F8ED100A54EFC /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		6F4CA49E243FA04200A54EFC /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		6FA00F4F2438BDFB00A5B2F1 /* SwipeMatchFirestore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatchFirestore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FA00F522438BDFB00A5B2F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FA00F542438BDFB00A5B2F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 				6FA00F6C243A163700A5B2F1 /* TopNavigationStackView.swift */,
 				6FA00F6E243A454A00A5B2F1 /* CardView.swift */,
 				6F15140D243CE3A900261221 /* CustomTextField.swift */,
+				6F4CA49E243FA04200A54EFC /* SettingsCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 			children = (
 				6FA00F562438BDFB00A5B2F1 /* HomeController.swift */,
 				6FA00F7B243CDCEF00A5B2F1 /* RegistrationController.swift */,
+				6F4CA49C243F8ED100A54EFC /* SettingsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -289,6 +295,7 @@
 				6FA00F572438BDFB00A5B2F1 /* HomeController.swift in Sources */,
 				6FA00F532438BDFB00A5B2F1 /* AppDelegate.swift in Sources */,
 				6FA00F6B243A115F00A5B2F1 /* HomeBottomControlsStackView.swift in Sources */,
+				6F4CA49D243F8ED100A54EFC /* SettingsController.swift in Sources */,
 				6FA00F7C243CDCEF00A5B2F1 /* RegistrationController.swift in Sources */,
 				6FA00F72243B5C9C00A5B2F1 /* User.swift in Sources */,
 				6F4CA49B243E28F400A54EFC /* Bindable.swift in Sources */,
@@ -296,6 +303,7 @@
 				6F15140E243CE3A900261221 /* CustomTextField.swift in Sources */,
 				6FA00F682438C07A00A5B2F1 /* Extensions+UIView.swift in Sources */,
 				6FA00F552438BDFB00A5B2F1 /* SceneDelegate.swift in Sources */,
+				6F4CA49F243FA04200A54EFC /* SettingsCell.swift in Sources */,
 				6FA00F76243B858600A5B2F1 /* CardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

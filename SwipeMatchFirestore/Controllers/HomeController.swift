@@ -56,10 +56,10 @@ class HomeController: UIViewController {
     }
     
     @objc func handleSettings() {
-        print("Show registration page")
-        let registrationController = RegistrationController()
-        registrationController.modalPresentationStyle = .fullScreen
-        present(registrationController, animated: true)
+        let settingsController = SettingsController()
+        let navController = UINavigationController(rootViewController: settingsController)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
     }
     
     var lastFetchedUser: User?
