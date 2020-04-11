@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import JGProgressHUD
+import SDWebImage
 
 class SettingsController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -48,6 +51,8 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         tableView.tableFooterView = UIView()
         tableView.keyboardDismissMode = .interactive
+        
+        fetchCurrentUser()
     }
     
     fileprivate func setupNavigationItems() {
@@ -62,10 +67,6 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
     
     @objc fileprivate func handleCancel() {
         dismiss(animated: true)
-    }
-    
-    @objc fileprivate func handleSave() {
-        
     }
     
     @objc fileprivate func handleLogout() {
@@ -142,14 +143,87 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         switch indexPath.section {
         case 1:
             cell.textField.placeholder = "Enter Name"
+            cell.textField.text = user?.name
+            cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
         case 2:
             cell.textField.placeholder = "Enter Profession"
+            cell.textField.text = user?.profession
+            cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
         case 3:
             cell.textField.placeholder = "Enter Age"
+            cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
+            if let age = user?.age {
+                cell.textField.text = String(age)
+            }
         default:
             cell.textField.placeholder = "Enter Bio"
         }
         return cell
+    }
+    
+    @objc func handleNameChange(textField: UITextField) {
+        user?.name = textField.text
+    }
+    
+    @objc func handleProfessionChange(textField: UITextField) {
+        user?.profession = textField.text
+    }
+    
+    @objc func handleAgeChange(textField: UITextField) {
+        user?.age = Int(textField.text ?? "")
+    }
+    
+    // MARK:- Firebase functions
+    var user: User?
+    
+    fileprivate func fetchCurrentUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error retreving current user info:", error)
+                return
+            }
+            
+            guard let dictionary = snapshot?.data() else { return }
+            self.user = User(dictionary: dictionary)
+            self.loadUserPhotos()
+            
+            self.tableView.reloadData()
+        }
+    }
+    
+    fileprivate func loadUserPhotos() {
+        guard let imageUrl = user?.imageUrl1, let url = URL(string: imageUrl) else { return }
+        SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+            self.image1Button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        
+    }
+    
+    @objc fileprivate func handleSave() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let docData: [String: Any] = [
+            "uid": uid,
+            "fullName": user?.name ?? "",
+            "imageUrl1": user?.imageUrl1 ?? "",
+            "age": user?.age ?? -1,
+            "profession": user?.profession ?? ""
+        ]
+        
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Saving settings"
+        hud.show(in: view)
+        
+        Firestore.firestore().collection("users").document(uid).setData(docData) { (error) in
+            hud.dismiss()
+            
+            if let error = error {
+                print("Failed to save user settings:", error)
+                return
+            }
+            
+            print("Finished saving user info")
+        }
     }
 }
 
