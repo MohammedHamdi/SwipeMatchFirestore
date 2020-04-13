@@ -91,45 +91,29 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     
     //MARK:- Firebase
     fileprivate func fetchCurrentUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, error) in
+        hud.textLabel.text = "Loading"
+        hud.show(in: view)
+        cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
+        Firestore.firestore().fetchCurrentUser { (user, error) in
             if let error = error {
-                print("Error retreving current user info:", error)
+                print("Failed to fetch current user:", error)
+                self.hud.dismiss()
                 return
             }
-            
-            guard let dictionary = snapshot?.data() else { return }
-            self.user = User(dictionary: dictionary)
-            
+            self.user = user
             self.fetchUsersFromFirestore()
         }
-        //
-//        hud.textLabel.text = "Loading"
-//        hud.show(in: view)
-//        cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
-//        Firestore.firestore().fetchCurrentUser { (user, error) in
-//            if let error = error {
-//                print("Failed to fetch current user:", error)
-//                self.hud.dismiss()
-//                return
-//            }
-//            self.user = user
-//            self.fetchUsersFromFirestore()
-//        }
     }
     
     var lastFetchedUser: User?
     
     fileprivate func fetchUsersFromFirestore() {
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Fetching Users"
-        hud.show(in: view)
         
         guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else { return }
         
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         query.getDocuments { (snapshot, error) in
-            hud.dismiss()
+            self.hud.dismiss()
             
             if let error = error {
                 print("Failed to fetch users:", error)
@@ -155,9 +139,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     }
     
     @objc fileprivate func handleRefresh() {
-        cardsDeckView.subviews.forEach({ (view) in
-            view.layer.removeAllAnimations()
-        })
+        cardsDeckView.subviews.forEach({$0.layer.removeAllAnimations()})
         fetchUsersFromFirestore()
     }
 }

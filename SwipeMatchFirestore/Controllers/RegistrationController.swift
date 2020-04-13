@@ -74,8 +74,7 @@ class RegistrationController: UIViewController {
     }()
     
     @objc fileprivate func handleGoToLogin() {
-        let loginController = LoginController()
-        navigationController?.pushViewController(loginController, animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     lazy var verticalStackView: UIStackView = {
