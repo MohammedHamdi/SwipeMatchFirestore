@@ -150,8 +150,10 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
             headerLabel.text = "Profession"
         case 3:
             headerLabel.text = "Age"
-        default:
+        case 4:
             headerLabel.text = "Bio"
+        default:
+            headerLabel.text = "Seeking Age Range"
         }
         return headerLabel
     }
@@ -166,7 +168,7 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -175,7 +177,24 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
     
     // MARK:- Table view delegate
     
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Age Range Cell
+        if indexPath.section == 5 {
+            let ageRangeCell = AgeRangeCell(style: .default, reuseIdentifier: nil)
+            ageRangeCell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
+            ageRangeCell.maxSlider.addTarget(self, action: #selector(handleMaxAgeChange), for: .valueChanged)
+            
+            ageRangeCell.minLabel.text = "Min \(user?.minSeekingAge ?? -1)"
+            ageRangeCell.minSlider.value = Float(user?.minSeekingAge ?? 18)
+            ageRangeCell.maxLabel.text = "Max \(user?.maxSeekingAge ?? -1)"
+            ageRangeCell.maxSlider.value = Float(user?.maxSeekingAge ?? 18)
+            return ageRangeCell
+        }
+        
         let cell = SettingsCell(style: .default, reuseIdentifier: nil)
         
         switch indexPath.section {
@@ -209,6 +228,30 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
     
     @objc func handleAgeChange(textField: UITextField) {
         user?.age = Int(textField.text ?? "")
+    }
+    
+    @objc fileprivate func handleMinAgeChange(slider: UISlider) {
+        let indexPath = IndexPath(row: 0, section: 5)
+        let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeCell
+        if slider.value >= ageRangeCell.maxSlider.value {
+            ageRangeCell.maxSlider.value = slider.value
+        }
+        ageRangeCell.minLabel.text = "Min \(Int(slider.value))"
+        ageRangeCell.maxLabel.text = "Max \(Int(ageRangeCell.maxSlider.value))"
+        
+        self.user?.minSeekingAge = Int(slider.value)
+    }
+    
+    @objc fileprivate func handleMaxAgeChange(slider: UISlider) {
+        let indexPath = IndexPath(row: 0, section: 5)
+        let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeCell
+        if slider.value <= ageRangeCell.minSlider.value {
+            ageRangeCell.minSlider.value = slider.value
+        }
+        ageRangeCell.maxLabel.text = "Max \(Int(slider.value))"
+        ageRangeCell.minLabel.text = "Min \(Int(ageRangeCell.minSlider.value))"
+        
+        self.user?.maxSeekingAge = Int(slider.value)
     }
     
     // MARK:- Firebase functions
@@ -257,7 +300,9 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
             "imageUrl2": user?.imageUrl2 ?? "",
             "imageUrl3": user?.imageUrl3 ?? "",
             "age": user?.age ?? -1,
-            "profession": user?.profession ?? ""
+            "profession": user?.profession ?? "",
+            "minSeekingAge": user?.minSeekingAge ?? -1,
+            "maxSeekingAge": user?.maxSeekingAge ?? -1
         ]
         
         let hud = JGProgressHUD(style: .dark)
