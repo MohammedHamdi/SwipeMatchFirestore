@@ -11,8 +11,14 @@ import Firebase
 import JGProgressHUD
 import SDWebImage
 
+protocol SettingsControllerDelegate {
+    func didSaveSettings()
+}
+
 class SettingsController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    var delegate: SettingsControllerDelegate?
+    
     //MARK:- Instance Properies
     lazy var image1Button = createButton(selector: #selector(handleSelectPhoto))
     lazy var image2Button = createButton(selector: #selector(handleSelectPhoto))
@@ -105,10 +111,6 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
     
     @objc fileprivate func handleCancel() {
         dismiss(animated: true)
-    }
-    
-    @objc fileprivate func handleLogout() {
-        
     }
 
     // MARK:- Header
@@ -322,7 +324,16 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
             }
             
             print("Finished saving user info")
+            self.dismiss(animated: true) {
+                print("Dismissal complete")
+                self.delegate?.didSaveSettings()
+            }
         }
+    }
+    
+    @objc fileprivate func handleLogout() {
+        try? Auth.auth().signOut()
+        dismiss(animated: true)
     }
 }
 

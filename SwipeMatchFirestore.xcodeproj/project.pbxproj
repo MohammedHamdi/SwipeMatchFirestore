@@ -15,6 +15,9 @@
 		6F4CA49D243F8ED100A54EFC /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA49C243F8ED100A54EFC /* SettingsController.swift */; };
 		6F4CA49F243FA04200A54EFC /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA49E243FA04200A54EFC /* SettingsCell.swift */; };
 		6F4CA4A124447A2D00A54EFC /* AgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA4A024447A2D00A54EFC /* AgeRangeCell.swift */; };
+		6F4CA4A32444BD5900A54EFC /* FirebaseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA4A22444BD5900A54EFC /* FirebaseUtilities.swift */; };
+		6F4CA4A52444C58100A54EFC /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA4A42444C58100A54EFC /* LoginController.swift */; };
+		6F4CA4A72444C59000A54EFC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA4A62444C59000A54EFC /* LoginViewModel.swift */; };
 		6FA00F532438BDFB00A5B2F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F522438BDFB00A5B2F1 /* AppDelegate.swift */; };
 		6FA00F552438BDFB00A5B2F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F542438BDFB00A5B2F1 /* SceneDelegate.swift */; };
 		6FA00F572438BDFB00A5B2F1 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F562438BDFB00A5B2F1 /* HomeController.swift */; };
@@ -40,6 +43,9 @@
 		6F4CA49C243F8ED100A54EFC /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		6F4CA49E243FA04200A54EFC /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		6F4CA4A024447A2D00A54EFC /* AgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeCell.swift; sourceTree = "<group>"; };
+		6F4CA4A22444BD5900A54EFC /* FirebaseUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtilities.swift; sourceTree = "<group>"; };
+		6F4CA4A42444C58100A54EFC /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		6F4CA4A62444C59000A54EFC /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		6FA00F4F2438BDFB00A5B2F1 /* SwipeMatchFirestore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatchFirestore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FA00F522438BDFB00A5B2F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FA00F542438BDFB00A5B2F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,7 +110,7 @@
 			children = (
 				6FA00F522438BDFB00A5B2F1 /* AppDelegate.swift */,
 				6FA00F542438BDFB00A5B2F1 /* SceneDelegate.swift */,
-				6FA00F662438C00900A5B2F1 /* Extensions */,
+				6FA00F662438C00900A5B2F1 /* Extensions+Utilities */,
 				6FA00F70243B5C8A00A5B2F1 /* Model */,
 				6FA00F74243B856500A5B2F1 /* ViewModels */,
 				6FA00F69243A112300A5B2F1 /* Views */,
@@ -118,12 +124,14 @@
 			path = SwipeMatchFirestore;
 			sourceTree = "<group>";
 		};
-		6FA00F662438C00900A5B2F1 /* Extensions */ = {
+		6FA00F662438C00900A5B2F1 /* Extensions+Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				6FA00F672438C07A00A5B2F1 /* Extensions+UIView.swift */,
+				6F4CA4A22444BD5900A54EFC /* FirebaseUtilities.swift */,
+				6F15140D243CE3A900261221 /* CustomTextField.swift */,
 			);
-			path = Extensions;
+			path = "Extensions+Utilities";
 			sourceTree = "<group>";
 		};
 		6FA00F69243A112300A5B2F1 /* Views */ = {
@@ -132,7 +140,6 @@
 				6FA00F6A243A115F00A5B2F1 /* HomeBottomControlsStackView.swift */,
 				6FA00F6C243A163700A5B2F1 /* TopNavigationStackView.swift */,
 				6FA00F6E243A454A00A5B2F1 /* CardView.swift */,
-				6F15140D243CE3A900261221 /* CustomTextField.swift */,
 				6F4CA49E243FA04200A54EFC /* SettingsCell.swift */,
 				6F4CA4A024447A2D00A54EFC /* AgeRangeCell.swift */,
 			);
@@ -153,6 +160,7 @@
 			children = (
 				6FA00F562438BDFB00A5B2F1 /* HomeController.swift */,
 				6FA00F7B243CDCEF00A5B2F1 /* RegistrationController.swift */,
+				6F4CA4A42444C58100A54EFC /* LoginController.swift */,
 				6F4CA49C243F8ED100A54EFC /* SettingsController.swift */,
 			);
 			path = Controllers;
@@ -163,6 +171,7 @@
 			children = (
 				6FA00F75243B858600A5B2F1 /* CardViewModel.swift */,
 				6F15140F243E011C00261221 /* RegistrationViewModel.swift */,
+				6F4CA4A62444C59000A54EFC /* LoginViewModel.swift */,
 				6F4CA49A243E28F400A54EFC /* Bindable.swift */,
 			);
 			path = ViewModels;
@@ -292,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F4CA4A52444C58100A54EFC /* LoginController.swift in Sources */,
 				6FA00F78243B94F400A5B2F1 /* Advertiser.swift in Sources */,
 				6F151410243E011C00261221 /* RegistrationViewModel.swift in Sources */,
 				6FA00F6F243A454A00A5B2F1 /* CardView.swift in Sources */,
@@ -299,6 +309,8 @@
 				6FA00F532438BDFB00A5B2F1 /* AppDelegate.swift in Sources */,
 				6F4CA4A124447A2D00A54EFC /* AgeRangeCell.swift in Sources */,
 				6FA00F6B243A115F00A5B2F1 /* HomeBottomControlsStackView.swift in Sources */,
+				6F4CA4A72444C59000A54EFC /* LoginViewModel.swift in Sources */,
+				6F4CA4A32444BD5900A54EFC /* FirebaseUtilities.swift in Sources */,
 				6F4CA49D243F8ED100A54EFC /* SettingsController.swift in Sources */,
 				6FA00F7C243CDCEF00A5B2F1 /* RegistrationController.swift in Sources */,
 				6FA00F72243B5C9C00A5B2F1 /* User.swift in Sources */,
