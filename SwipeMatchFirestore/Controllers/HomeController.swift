@@ -10,9 +10,9 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate {
+class HomeController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate {
     
-    var cardViewModels = [CardViewModel]()
+//    var cardViewModels = [CardViewModel]()
     
     fileprivate var user: User?
     fileprivate let hud = JGProgressHUD(style: .dark)
@@ -35,7 +35,6 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("Home controller did appear")
         
         if Auth.auth().currentUser == nil {
             let loginController = LoginController()
@@ -67,15 +66,15 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         overallStackview.bringSubviewToFront(cardsDeckView)
     }
     
-    fileprivate func setupFirestoreUserCards() {
-        cardViewModels.forEach { (cardViewModel) in
-            let cardView = CardView()
-            cardView.cardViewModel = cardViewModel
-            
-            cardsDeckView.addSubview(cardView)
-            cardView.fillSuperview()
-        }
-    }
+//    fileprivate func setupFirestoreUserCards() {
+//        cardViewModels.forEach { (cardViewModel) in
+//            let cardView = CardView()
+//            cardView.cardViewModel = cardViewModel
+//            
+//            cardsDeckView.addSubview(cardView)
+//            cardView.fillSuperview()
+//        }
+//    }
     
     @objc func handleSettings() {
         let settingsController = SettingsController()
@@ -123,19 +122,28 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
-                self.cardViewModels.append(user.toCardViewModel())
-                self.lastFetchedUser = user
-                self.setupCardFromUser(user: user)
+//                self.cardViewModels.append(user.toCardViewModel())
+//                self.lastFetchedUser = user
+                if user.uid != Auth.auth().currentUser?.uid {
+                    self.setupCardFromUser(user: user)
+                }
             })
         }
     }
     
     fileprivate func setupCardFromUser(user: User) {
         let cardView = CardView()
+        cardView.delegate = self
         cardView.cardViewModel = user.toCardViewModel()
         cardsDeckView.addSubview(cardView)
         cardsDeckView.sendSubviewToBack(cardView)
         cardView.fillSuperview()
+    }
+    
+    func didTapMoreInfo() {
+        let userDetailsController = UserDetailsController()
+        userDetailsController.modalPresentationStyle = .fullScreen
+        present(userDetailsController, animated: true)
     }
     
     @objc fileprivate func handleRefresh() {
