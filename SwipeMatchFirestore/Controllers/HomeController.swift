@@ -70,7 +70,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
 //        cardViewModels.forEach { (cardViewModel) in
 //            let cardView = CardView()
 //            cardView.cardViewModel = cardViewModel
-//            
+//
 //            cardsDeckView.addSubview(cardView)
 //            cardView.fillSuperview()
 //        }
@@ -140,8 +140,10 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         cardView.fillSuperview()
     }
     
-    func didTapMoreInfo() {
+    func didTapMoreInfo(cardViewModel: CardViewModel) {
+        print("Home controller:", cardViewModel.attributedString)
         let userDetailsController = UserDetailsController()
+        userDetailsController.cardViewModel = cardViewModel
         userDetailsController.modalPresentationStyle = .fullScreen
         present(userDetailsController, animated: true)
     }

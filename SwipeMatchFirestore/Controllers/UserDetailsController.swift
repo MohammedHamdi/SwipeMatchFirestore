@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import SDWebImage
 
 class UserDetailsController: UIViewController, UIScrollViewDelegate {
 
+    var cardViewModel: CardViewModel! {
+        didSet {
+            infoLabel.attributedText = cardViewModel.attributedString
+            
+            guard let firstImageUrl = cardViewModel.imageUrls.first, let url = URL(string: firstImageUrl) else { return }
+            imageView.sd_setImage(with: url)
+        }
+    }
+    
     lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.alwaysBounceVertical = true
@@ -32,11 +42,36 @@ class UserDetailsController: UIViewController, UIScrollViewDelegate {
         return label
     }()
     
+    let dismissButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "dismiss_down_arrow").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var dislikeButton = self.createButton(image: #imageLiteral(resourceName: "dismiss_circle"), selector: #selector(handleDislike))
+    lazy var superLikeButton = self.createButton(image: #imageLiteral(resourceName: "super_like_circle"), selector: #selector(handleDislike))
+    lazy var likeButton = self.createButton(image: #imageLiteral(resourceName: "like_circle"), selector: #selector(handleDislike))
+    
+    fileprivate func createButton(image: UIImage, selector: Selector) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        return button
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
         
+        setupLayout()
+        setupVisualBlurEffectView()
+        setupBottomControls()
+    }
+    
+    fileprivate func setupLayout() {
         view.addSubview(scrollView)
         scrollView.fillSuperview()
         
@@ -46,7 +81,26 @@ class UserDetailsController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(infoLabel)
         infoLabel.anchor(top: imageView.bottomAnchor, leading: scrollView.leadingAnchor, bottom: nil, trailing: scrollView.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
         
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
+        scrollView.addSubview(dismissButton)
+        dismissButton.anchor(top: imageView.bottomAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: -25, left: 0, bottom: 0, right: 24), size: .init(width: 50, height: 50))
+    }
+    
+    fileprivate func setupVisualBlurEffectView() {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        view.addSubview(visualEffectView)
+        visualEffectView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, trailing: view.trailingAnchor)
+    }
+    
+    fileprivate func setupBottomControls() {
+        let stackView = UIStackView(arrangedSubviews: [dislikeButton, superLikeButton, likeButton])
+        stackView.distribution = .fillEqually
+        stackView.spacing = -32
+        
+        view.addSubview(stackView)
+        stackView.anchor(top: nil, leading: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 300, height: 80))
+        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -56,7 +110,11 @@ class UserDetailsController: UIViewController, UIScrollViewDelegate {
         imageView.frame = CGRect(x: min(0, -changeY), y: min(0, -changeY), width: width, height: width)
     }
 
-    @objc fileprivate func handleTapDismiss() {
+    @objc fileprivate func handleDismiss() {
         self.dismiss(animated: true)
+    }
+    
+    @objc fileprivate func handleDislike() {
+        print("Disliking")
     }
 }
