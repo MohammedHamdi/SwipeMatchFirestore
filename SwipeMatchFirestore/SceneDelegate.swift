@@ -23,8 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         FirebaseApp.configure()
         
         window?.makeKeyAndVisible()
-//        window?.rootViewController = HomeController()
-        window?.rootViewController = SwipingPhotosController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        window?.rootViewController = HomeController()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -163,10 +163,10 @@
 			isa = PBXGroup;
 			children = (
 				6FA00F562438BDFB00A5B2F1 /* HomeController.swift */,
-				6F526DA524461801001891CE /* UserDetailsController.swift */,
 				6FA00F7B243CDCEF00A5B2F1 /* RegistrationController.swift */,
 				6F4CA4A42444C58100A54EFC /* LoginController.swift */,
 				6F4CA49C243F8ED100A54EFC /* SettingsController.swift */,
+				6F526DA524461801001891CE /* UserDetailsController.swift */,
 				6F526DA724488A46001891CE /* SwipingPhotosController.swift */,
 			);
 			path = Controllers;
