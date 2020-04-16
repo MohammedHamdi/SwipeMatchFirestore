@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSource {
+class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
     var cardViewModel: CardViewModel! {
         didSet {
@@ -19,22 +19,47 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
             })
             
             setViewControllers([controllers.first!], direction: .forward, animated: false)
+            
+            setupBarViews()
         }
+    }
+    
+    fileprivate let barsStackview = UIStackView(arrangedSubviews: [])
+    fileprivate let deselectedBarColor = UIColor(white: 0, alpha: 0.1)
+    
+    fileprivate func setupBarViews() {
+        cardViewModel.imageUrls.forEach { (_) in
+            let barView = UIView()
+            barView.backgroundColor = deselectedBarColor
+            barView.layer.cornerRadius = 2
+            barsStackview.addArrangedSubview(barView)
+        }
+        
+        barsStackview.arrangedSubviews.first?.backgroundColor = .white
+        barsStackview.spacing = 4
+        barsStackview.distribution = .fillEqually
+        
+        view.addSubview(barsStackview)
+        let paddingTop = UIApplication.shared.statusBarFrame.height + 8
+        barsStackview.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: paddingTop, left: 8, bottom: 0, right: 8), size: .init(width: 0, height: 4))
+//        barsStackview.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8), size: .init(width: 0, height: 4))
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        let currentPhotoController = viewControllers?.first
+        if let index = controllers.firstIndex(where: {$0 == currentPhotoController}) {
+            barsStackview.arrangedSubviews.forEach({$0.backgroundColor = deselectedBarColor})
+            barsStackview.arrangedSubviews[index].backgroundColor = .white
+        }
+        
     }
     
     var controllers = [UIViewController]()
     
-//    let controllers = [
-//        PhotoController(image: #imageLiteral(resourceName: "pc3")),
-//        PhotoController(image: #imageLiteral(resourceName: "thermaltake")),
-//        PhotoController(image: #imageLiteral(resourceName: "pc2")),
-//        PhotoController(image: #imageLiteral(resourceName: "maingearPC")),
-//        PhotoController(image: #imageLiteral(resourceName: "maingearPC2"))
-//    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
+        delegate = self
         
         view.backgroundColor = .white
         
