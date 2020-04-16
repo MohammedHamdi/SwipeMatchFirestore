@@ -10,7 +10,9 @@ import UIKit
 import JGProgressHUD
 
 class RegistrationController: UIViewController {
-
+    
+    var delegate: LoginControllerDelegate?
+    
     //MARK:- UI Components
     let selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -229,6 +231,9 @@ class RegistrationController: UIViewController {
                 return
             }
             print("Finished registering user")
+            self.dismiss(animated: true) {
+                self.delegate?.didFinishLoggingIn()
+            }
         }
     }
     
@@ -257,6 +262,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
         registrationViewModel.bindableImage.value = image
+        registrationViewModel.checkFormValidity()
         dismiss(animated: true, completion: nil)
     }
 }
