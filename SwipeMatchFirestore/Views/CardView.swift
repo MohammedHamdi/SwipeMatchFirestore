@@ -172,23 +172,38 @@ class CardView: UIView {
         let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
         let shouldDismissCard = abs(gesture.translation(in: nil).x) > threshold
         
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
-            if shouldDismissCard {
-                
-                self.center = CGPoint(x: 600 * translationDirection, y: 0)
-                
+        if shouldDismissCard {
+            // Hack solution
+            guard let homeController = self.delegate as? HomeController else { return }
+            
+            if translationDirection == 1 {
+                homeController.handleLike()
             } else {
+                homeController.handleDislike()
+            }
+        } else {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
                 self.transform = .identity
-            }
-        }) { (_) in
-            self.transform = .identity
-            if shouldDismissCard {
-                self.removeFromSuperview()
-                
-                // Reset topCardView inside HomeController
-                self.delegate?.didRemoveCard(cardView: self)
-            }
+            })
         }
+        
+//        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+//            if shouldDismissCard {
+//
+//                self.center = CGPoint(x: 600 * translationDirection, y: 0)
+//
+//            } else {
+//                self.transform = .identity
+//            }
+//        }) { (_) in
+//            self.transform = .identity
+//            if shouldDismissCard {
+//                self.removeFromSuperview()
+//
+//                // Reset topCardView inside HomeController
+//                self.delegate?.didRemoveCard(cardView: self)
+//            }
+//        }
     }
     
 //    @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
