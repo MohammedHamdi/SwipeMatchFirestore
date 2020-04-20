@@ -7,21 +7,23 @@
 //
 
 import LBTATools
+import Firebase
+import SDWebImage
 
-class MatchesMessagesController: LBTAListController<MatchCell, UIColor>, UICollectionViewDelegateFlowLayout {
+class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollectionViewDelegateFlowLayout {
     
     let customNavBar = MatchesNavBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        items = [
-            .red,
-            .blue,
-            .green,
-            .purple,
-            .orange
-        ]
+//        items  = [
+//            .init(name: "Test", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchfirestore-51938.appspot.com/o/images%2F05885EF7-7022-4509-A87D-226399EF6672?alt=media&token=f30425be-6b8a-4d02-bbff-72922f359f25"),
+//            .init(name: "1", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchfirestore-51938.appspot.com/o/images%2F05885EF7-7022-4509-A87D-226399EF6672?alt=media&token=f30425be-6b8a-4d02-bbff-72922f359f25"),
+//            .init(name: "2", profileImageUrl: "profile url")
+//        ]
+        
+        fetchMatches()
         
         collectionView.backgroundColor = .white
         
@@ -33,6 +35,26 @@ class MatchesMessagesController: LBTAListController<MatchCell, UIColor>, UIColle
         collectionView.contentInset.top = 150
     }
     
+    fileprivate func fetchMatches() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("matches").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Failed to fetch matches:", error)
+                return
+            }
+            
+            var matches = [Match]()
+            snapshot?.documents.forEach({ (documentSnapshot) in
+                let dictionary = documentSnapshot.data()
+                matches.append(.init(dictionary: dictionary))
+            })
+            
+            self.items = matches
+            self.collectionView.reloadData()
+        }
+    }
+    
     @objc fileprivate func handleBack() {
         navigationController?.popViewController(animated: true)
     }
@@ -40,16 +62,21 @@ class MatchesMessagesController: LBTAListController<MatchCell, UIColor>, UIColle
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: 120, height: 140)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .init(top: 16, left: 0, bottom: 16, right: 0)
+    }
 }
 
-class MatchCell: LBTAListCell<UIColor> {
+class MatchCell: LBTAListCell<Match> {
     
     let profileImageView: UIImageView = UIImageView(image: #imageLiteral(resourceName: "pc3"), contentMode: .scaleAspectFill)
     let usernameLabel = UILabel(text: "Username Here", font: .systemFont(ofSize: 14, weight: .semibold), textColor: #colorLiteral(red: 0.2099210322, green: 0.209956944, blue: 0.2099131644, alpha: 1), textAlignment: .center, numberOfLines: 2)
     
-    override var item: UIColor! {
+    override var item: Match! {
         didSet {
-            backgroundColor = item
+            usernameLabel.text = item.name
+            profileImageView.sd_setImage(with: URL(string: item.profileImageUrl))
         }
     }
     
@@ -62,5 +89,14 @@ class MatchCell: LBTAListCell<UIColor> {
         profileImageView.layer.cornerRadius = 80 / 2
         
         stack(stack(profileImageView, alignment: .center), usernameLabel)
+    }
+}
+
+struct Match {
+    let name, profileImageUrl: String
+    
+    init(dictionary: [String: Any]) {
+        self.name = dictionary["name"] as? String ?? ""
+        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
     }
 }
