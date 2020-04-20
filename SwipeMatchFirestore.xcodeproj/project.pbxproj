@@ -38,6 +38,7 @@
 		6FA00F78243B94F400A5B2F1 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F77243B94F400A5B2F1 /* Advertiser.swift */; };
 		6FA00F7A243B979400A5B2F1 /* Assets.xcassets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FA00F79243B979400A5B2F1 /* Assets.xcassets.xcassets */; };
 		6FA00F7C243CDCEF00A5B2F1 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F7B243CDCEF00A5B2F1 /* RegistrationController.swift */; };
+		6FED0CA6244DCC1C00E9293C /* MatchesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FED0CA5244DCC1C00E9293C /* MatchesNavBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		6FA00F77243B94F400A5B2F1 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		6FA00F79243B979400A5B2F1 /* Assets.xcassets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.xcassets; sourceTree = "<group>"; };
 		6FA00F7B243CDCEF00A5B2F1 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		6FED0CA5244DCC1C00E9293C /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
 		8A80F49EFBA6C3FF2E3DE384 /* Pods_SwipeMatchFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeMatchFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9BF123E8DEB97FD6E7A8303 /* Pods-SwipeMatchFirestore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchFirestore.release.xcconfig"; path = "Target Support Files/Pods-SwipeMatchFirestore/Pods-SwipeMatchFirestore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +167,7 @@
 				6F07C1AE244B6E0D0014F918 /* MatchView.swift */,
 				6F07C1B0244C5B2B0014F918 /* SendMessageButton.swift */,
 				6F07C1B2244C622F0014F918 /* KeepSwipingButton.swift */,
+				6FED0CA5244DCC1C00E9293C /* MatchesNavBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				6F07C1AF244B6E0D0014F918 /* MatchView.swift in Sources */,
 				6F4CA4A72444C59000A54EFC /* LoginViewModel.swift in Sources */,
 				6F4CA4A32444BD5900A54EFC /* FirebaseUtilities.swift in Sources */,
+				6FED0CA6244DCC1C00E9293C /* MatchesNavBar.swift in Sources */,
 				6F4CA49D243F8ED100A54EFC /* SettingsController.swift in Sources */,
 				6FA00F7C243CDCEF00A5B2F1 /* RegistrationController.swift in Sources */,
 				6FA00F72243B5C9C00A5B2F1 /* User.swift in Sources */,
