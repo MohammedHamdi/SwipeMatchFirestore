@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+@available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -22,8 +23,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         FirebaseApp.configure()
         
-        window?.makeKeyAndVisible()
+//        window = UIWindow()
 //        window?.rootViewController = HomeController()
+//        window?.makeKeyAndVisible()
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            window.rootViewController = UINavigationController(rootViewController: HomeController())
+            self.window = window
+            window.makeKeyAndVisible()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
