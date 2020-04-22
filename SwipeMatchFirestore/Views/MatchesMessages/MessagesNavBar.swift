@@ -34,9 +34,9 @@ class MessagesNavBar: UIView {
             alignment: .center
         )
         
-        hstack(backButton,
+        hstack(backButton.withWidth(50),
                middleStack,
-               flagButton).withMargins(.init(top: 0, left: 16, bottom: 0, right: 16))
+               flagButton).withMargins(.init(top: 0, left: 4, bottom: 0, right: 16))
     }
     
     required init?(coder: NSCoder) {
