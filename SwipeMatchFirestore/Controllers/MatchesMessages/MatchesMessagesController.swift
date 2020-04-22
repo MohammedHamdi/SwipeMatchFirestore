@@ -17,12 +17,6 @@ class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        items  = [
-//            .init(name: "Test", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchfirestore-51938.appspot.com/o/images%2F05885EF7-7022-4509-A87D-226399EF6672?alt=media&token=f30425be-6b8a-4d02-bbff-72922f359f25"),
-//            .init(name: "1", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchfirestore-51938.appspot.com/o/images%2F05885EF7-7022-4509-A87D-226399EF6672?alt=media&token=f30425be-6b8a-4d02-bbff-72922f359f25"),
-//            .init(name: "2", profileImageUrl: "profile url")
-//        ]
-        
         fetchMatches()
         
         collectionView.backgroundColor = .white
@@ -65,6 +59,12 @@ class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 16, left: 0, bottom: 16, right: 0)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let match = items[indexPath.item]
+        let chatLogController = ChatLogController(match: match)
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
 }
 
