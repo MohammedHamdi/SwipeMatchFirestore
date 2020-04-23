@@ -18,6 +18,8 @@
 		6F28951E2451AFF50033957B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28951D2451AFF50033957B /* MessageCell.swift */; };
 		6F2895202451B02E0033957B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28951F2451B02E0033957B /* Message.swift */; };
 		6F2895222451B8C40033957B /* CustomInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2895212451B8C40033957B /* CustomInputAccessoryView.swift */; };
+		6F2895242451FAD50033957B /* MatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2895232451FAD50033957B /* MatchCell.swift */; };
+		6F2895262451FB0F0033957B /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2895252451FB0F0033957B /* Match.swift */; };
 		6F4CA499243E1F5000A54EFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F4CA498243E1F5000A54EFC /* GoogleService-Info.plist */; };
 		6F4CA49B243E28F400A54EFC /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA49A243E28F400A54EFC /* Bindable.swift */; };
 		6F4CA49D243F8ED100A54EFC /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA49C243F8ED100A54EFC /* SettingsController.swift */; };
@@ -58,6 +60,8 @@
 		6F28951D2451AFF50033957B /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		6F28951F2451B02E0033957B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		6F2895212451B8C40033957B /* CustomInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccessoryView.swift; sourceTree = "<group>"; };
+		6F2895232451FAD50033957B /* MatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCell.swift; sourceTree = "<group>"; };
+		6F2895252451FB0F0033957B /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		6F4CA498243E1F5000A54EFC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6F4CA49A243E28F400A54EFC /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		6F4CA49C243F8ED100A54EFC /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 			children = (
 				6FED0CA5244DCC1C00E9293C /* MatchesNavBar.swift */,
 				6F28951B24508CAA0033957B /* MessagesNavBar.swift */,
+				6F2895232451FAD50033957B /* MatchCell.swift */,
 				6F28951D2451AFF50033957B /* MessageCell.swift */,
 				6F2895212451B8C40033957B /* CustomInputAccessoryView.swift */,
 			);
@@ -199,6 +204,7 @@
 			children = (
 				6FA00F71243B5C9C00A5B2F1 /* User.swift */,
 				6FA00F77243B94F400A5B2F1 /* Advertiser.swift */,
+				6F2895252451FB0F0033957B /* Match.swift */,
 				6F28951F2451B02E0033957B /* Message.swift */,
 			);
 			path = Model;
@@ -378,11 +384,13 @@
 				6FA00F6D243A163700A5B2F1 /* TopNavigationStackView.swift in Sources */,
 				6F15140E243CE3A900261221 /* CustomTextField.swift in Sources */,
 				6FA00F552438BDFB00A5B2F1 /* SceneDelegate.swift in Sources */,
+				6F2895262451FB0F0033957B /* Match.swift in Sources */,
 				6F07C1B3244C622F0014F918 /* KeepSwipingButton.swift in Sources */,
 				6F4CA49F243FA04200A54EFC /* SettingsCell.swift in Sources */,
 				6F289519245071BC0033957B /* ChatLogController.swift in Sources */,
 				6F526DA824488A46001891CE /* SwipingPhotosController.swift in Sources */,
 				6FA00F76243B858600A5B2F1 /* CardViewModel.swift in Sources */,
+				6F2895242451FAD50033957B /* MatchCell.swift in Sources */,
 				6F28951C24508CAA0033957B /* MessagesNavBar.swift in Sources */,
 				6F7EEB5F244DC3B5006CD41F /* MatchesMessagesController.swift in Sources */,
 			);

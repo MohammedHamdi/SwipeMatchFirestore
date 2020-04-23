@@ -10,7 +10,7 @@ import LBTATools
 import Firebase
 import SDWebImage
 
-class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollectionViewDelegateFlowLayout {
+class MatchesMessagesController: LBTAListHeaderController<MatchCell, Match, MatchesHeader>, UICollectionViewDelegateFlowLayout {
     
     let customNavBar = MatchesNavBar()
     
@@ -18,15 +18,7 @@ class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollect
         super.viewDidLoad()
         
         fetchMatches()
-        
-        collectionView.backgroundColor = .white
-        
-        customNavBar.backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
-        
-        view.addSubview(customNavBar)
-        customNavBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: 0, height: 150))
-        
-        collectionView.contentInset.top = 150
+        setupUI()
     }
     
     fileprivate func fetchMatches() {
@@ -49,6 +41,17 @@ class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollect
         }
     }
     
+    fileprivate func setupUI() {
+        collectionView.backgroundColor = .white
+        
+        customNavBar.backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+        
+        view.addSubview(customNavBar)
+        customNavBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: 0, height: 150))
+        
+        collectionView.contentInset.top = 150
+    }
+    
     @objc fileprivate func handleBack() {
         navigationController?.popViewController(animated: true)
     }
@@ -66,38 +69,89 @@ class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollect
         let chatLogController = ChatLogController(match: match)
         navigationController?.pushViewController(chatLogController, animated: true)
     }
+    
+    //MARK:- Header
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: 250)
+    }
+    
+    override func setupHeader(_ header: MatchesHeader) {
+        header.matchesHorizontalController.rootMatchesController = self
+    }
+    
+    func didSelectMatchFromHeader(match: Match) {
+        let chatLogController = ChatLogController(match: match)
+        navigationController?.pushViewController(chatLogController, animated: true)
+    }
 }
 
-class MatchCell: LBTAListCell<Match> {
+class MatchesHeader: UICollectionReusableView {
     
-    let profileImageView: UIImageView = UIImageView(image: #imageLiteral(resourceName: "pc3"), contentMode: .scaleAspectFill)
-    let usernameLabel = UILabel(text: "Username Here", font: .systemFont(ofSize: 14, weight: .semibold), textColor: #colorLiteral(red: 0.2099210322, green: 0.209956944, blue: 0.2099131644, alpha: 1), textAlignment: .center, numberOfLines: 2)
+    let newMatchesLabel = UILabel(text: "New Matches", font: .boldSystemFont(ofSize: 18), textColor: #colorLiteral(red: 0.949775517, green: 0.2833624482, blue: 0.5616319776, alpha: 1))
     
-    override var item: Match! {
-        didSet {
-            usernameLabel.text = item.name
-            profileImageView.sd_setImage(with: URL(string: item.profileImageUrl))
+    let matchesHorizontalController = MatchesHorizontalController()
+    
+    let messagesLabel = UILabel(text: "Messages", font: .boldSystemFont(ofSize: 18), textColor: #colorLiteral(red: 0.949775517, green: 0.2833624482, blue: 0.5616319776, alpha: 1))
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        stack(stack(newMatchesLabel).padLeft(20),
+              matchesHorizontalController.view,
+              stack(messagesLabel).padLeft(20),
+              spacing: 20).withMargins(.init(top: 20, left: 0, bottom: 20, right: 0))
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class MatchesHorizontalController: LBTAListController<MatchCell, Match>, UICollectionViewDelegateFlowLayout {
+    
+    var rootMatchesController: MatchesMessagesController?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
+        
+        fetchMatches()
+    }
+    
+    fileprivate func fetchMatches() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("matches").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Failed to fetch matches:", error)
+                return
+            }
+            
+            var matches = [Match]()
+            snapshot?.documents.forEach({ (documentSnapshot) in
+                let dictionary = documentSnapshot.data()
+                matches.append(.init(dictionary: dictionary))
+            })
+            
+            self.items = matches
+            self.collectionView.reloadData()
         }
     }
     
-    override func setupViews() {
-        super.setupViews()
-        
-        profileImageView.clipsToBounds = true
-        profileImageView.constrainWidth(80)
-        profileImageView.constrainHeight(80)
-        profileImageView.layer.cornerRadius = 80 / 2
-        
-        stack(stack(profileImageView, alignment: .center), usernameLabel)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: 110, height: view.frame.height)
     }
-}
-
-struct Match {
-    let name, profileImageUrl, uid: String
     
-    init(dictionary: [String: Any]) {
-        self.name = dictionary["name"] as? String ?? ""
-        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
-        self.uid = dictionary["uid"] as? String ?? ""
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .init(top: 0, left: 4, bottom: 0, right: 16)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let match = self.items[indexPath.item]
+        
+        rootMatchesController?.didSelectMatchFromHeader(match: match)
     }
 }

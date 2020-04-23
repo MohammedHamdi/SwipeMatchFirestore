@@ -126,7 +126,9 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
             }
             
             print("Swipes:", snapshot?.data() ?? "")
-            guard let data = snapshot?.data() as? [String: Int] else { return }
+            guard let data = snapshot?.data() as? [String: Int] else {
+                self.fetchUsersFromFirestore()
+                return }
             self.swipes = data
             self.fetchUsersFromFirestore()
         }
