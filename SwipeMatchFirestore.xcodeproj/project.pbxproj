@@ -28,6 +28,8 @@
 		6F4CA4A32444BD5900A54EFC /* FirebaseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA4A22444BD5900A54EFC /* FirebaseUtilities.swift */; };
 		6F4CA4A52444C58100A54EFC /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA4A42444C58100A54EFC /* LoginController.swift */; };
 		6F4CA4A72444C59000A54EFC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA4A62444C59000A54EFC /* LoginViewModel.swift */; };
+		6F515BC924530B3700D57177 /* MatchesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F515BC824530B3700D57177 /* MatchesHeader.swift */; };
+		6F515BCB24530B7A00D57177 /* MatchesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F515BCA24530B7A00D57177 /* MatchesHorizontalController.swift */; };
 		6F526DA624461801001891CE /* UserDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F526DA524461801001891CE /* UserDetailsController.swift */; };
 		6F526DA824488A46001891CE /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F526DA724488A46001891CE /* SwipingPhotosController.swift */; };
 		6F526DAA2449DAE9001891CE /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F526DA92449DAE9001891CE /* PhotoController.swift */; };
@@ -70,6 +72,8 @@
 		6F4CA4A22444BD5900A54EFC /* FirebaseUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtilities.swift; sourceTree = "<group>"; };
 		6F4CA4A42444C58100A54EFC /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		6F4CA4A62444C59000A54EFC /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		6F515BC824530B3700D57177 /* MatchesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHeader.swift; sourceTree = "<group>"; };
+		6F515BCA24530B7A00D57177 /* MatchesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHorizontalController.swift; sourceTree = "<group>"; };
 		6F526DA524461801001891CE /* UserDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsController.swift; sourceTree = "<group>"; };
 		6F526DA724488A46001891CE /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		6F526DA92449DAE9001891CE /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 				6F2895232451FAD50033957B /* MatchCell.swift */,
 				6F28951D2451AFF50033957B /* MessageCell.swift */,
 				6F2895212451B8C40033957B /* CustomInputAccessoryView.swift */,
+				6F515BC824530B3700D57177 /* MatchesHeader.swift */,
 			);
 			path = MatchesMessages;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				6F7EEB5E244DC3B5006CD41F /* MatchesMessagesController.swift */,
+				6F515BCA24530B7A00D57177 /* MatchesHorizontalController.swift */,
 				6F289518245071BC0033957B /* ChatLogController.swift */,
 			);
 			path = MatchesMessages;
@@ -372,6 +378,7 @@
 				6FA00F6B243A115F00A5B2F1 /* HomeBottomControlsStackView.swift in Sources */,
 				6F2895222451B8C40033957B /* CustomInputAccessoryView.swift in Sources */,
 				6F28951E2451AFF50033957B /* MessageCell.swift in Sources */,
+				6F515BCB24530B7A00D57177 /* MatchesHorizontalController.swift in Sources */,
 				6F07C1AF244B6E0D0014F918 /* MatchView.swift in Sources */,
 				6F4CA4A72444C59000A54EFC /* LoginViewModel.swift in Sources */,
 				6F4CA4A32444BD5900A54EFC /* FirebaseUtilities.swift in Sources */,
@@ -386,6 +393,7 @@
 				6FA00F552438BDFB00A5B2F1 /* SceneDelegate.swift in Sources */,
 				6F2895262451FB0F0033957B /* Match.swift in Sources */,
 				6F07C1B3244C622F0014F918 /* KeepSwipingButton.swift in Sources */,
+				6F515BC924530B3700D57177 /* MatchesHeader.swift in Sources */,
 				6F4CA49F243FA04200A54EFC /* SettingsCell.swift in Sources */,
 				6F289519245071BC0033957B /* ChatLogController.swift in Sources */,
 				6F526DA824488A46001891CE /* SwipingPhotosController.swift in Sources */,

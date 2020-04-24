@@ -62,7 +62,12 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         customNavBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: 0, height: navBarHeight))
         
         collectionView.contentInset.top = navBarHeight
-        collectionView.verticalScrollIndicatorInsets.top = navBarHeight
+        
+        if #available(iOS 13.0, *) {
+            collectionView.verticalScrollIndicatorInsets.top = navBarHeight
+        } else {
+            collectionView.scrollIndicatorInsets.top = navBarHeight
+        }
         
         customNavBar.backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
         
