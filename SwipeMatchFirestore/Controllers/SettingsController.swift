@@ -88,6 +88,10 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         return button
     }
     
+    deinit {
+//        print("Object is deinit")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

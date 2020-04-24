@@ -45,6 +45,10 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+//        print("Object is deinit")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +61,15 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         fetchMessages()
         
         setupUI()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Tells you if its being popped off the nav stack
+        if isMovingFromParent {
+            listener?.remove()
+        }
     }
     
     fileprivate func fetchCurrentUser() {
@@ -176,6 +189,8 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         }
     }
     
+    var listener: ListenerRegistration?
+    
     fileprivate func fetchMessages() {
         print("Fetching messages")
         
@@ -183,7 +198,7 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         
         let query = Firestore.firestore().collection("matches_messages").document(currentUserId).collection(match.uid).order(by: "timestamp")
         
-        query.addSnapshotListener { (querySnapshot, error) in
+        listener = query.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Failed to fetch messages:", error)
                 return

@@ -13,6 +13,8 @@ class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, Rec
     
     var recentMessagesDictionary = [String: RecentMessage]()
     
+    var listener: ListenerRegistration?
+    
     let customNavBar = MatchesNavBar()
     
     fileprivate let navBarHeight: CGFloat = 150
@@ -23,16 +25,26 @@ class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, Rec
         fetchRecentMessages()
         
         items = []
-//        items = [.init(text: "Some random message that will be user for recent message cell", uid: "BLANK", name: "BLABLA", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchfirestore-51938.appspot.com/o/images%2FC7DB0593-88B5-431A-9975-3D0CDAD20FC1?alt=media&token=7a03f96a-351a-47f3-a7b9-f668b574adf8", timestamp: Timestamp(date: Date())),
-//                 .init(text: "Random Message", uid: "BLANK", name: "Random user", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchfirestore-51938.appspot.com/o/images%2FC7DB0593-88B5-431A-9975-3D0CDAD20FC1?alt=media&token=7a03f96a-351a-47f3-a7b9-f668b574adf8", timestamp: Timestamp(date: Date())),
-//        ]
         
         setupUI()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParent {
+            listener?.remove()
+        }
+    }
+    
+    deinit {
+        print("Object deinit recent messages")
+    }
+    
     fileprivate func fetchRecentMessages() {
         guard let  currentUserId = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("recent_messages").addSnapshotListener { (querySnapshot, error) in
+        let query = Firestore.firestore().collection("matches_messages").document(currentUserId).collection("recent_messages")
+        listener = query.addSnapshotListener { (querySnapshot, error) in
             
             if let error = error {
                 print("Error while listening for recent messages:", error)
