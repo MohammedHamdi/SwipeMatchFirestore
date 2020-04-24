@@ -11,6 +11,8 @@ import Firebase
 
 class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionViewDelegateFlowLayout {
     
+    var currentUser: User?
+    
     fileprivate lazy var customNavBar = MessagesNavBar(match: match)
     
     fileprivate let navBarHeight: CGFloat = 120
@@ -46,6 +48,8 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchCurrentUser()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         
         collectionView.keyboardDismissMode = .interactive
@@ -53,6 +57,13 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         fetchMessages()
         
         setupUI()
+    }
+    
+    fileprivate func fetchCurrentUser() {
+        Firestore.firestore().collection("users").document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error) in
+            let data = snapshot?.data() ?? [:]
+            self.currentUser = User(dictionary: data)
+        }
     }
     
     private func setupUI() {
@@ -100,6 +111,12 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
     @objc fileprivate func handleSend() {
         print(customInputView.textView.text ?? "")
         
+        saveToFromMessages()
+        saveToFromRecentMessages()
+    }
+    
+    fileprivate func saveToFromMessages() {
+        
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
         
         let collection = Firestore.firestore().collection("matches_messages").document(currentUserId).collection(match.uid)
@@ -128,6 +145,34 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
             print("Successfully saved message into firestore")
             self.customInputView.textView.text = nil
             self.customInputView.placeholderLabel.isHidden = false
+        }
+    }
+    
+    fileprivate func saveToFromRecentMessages() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        
+        let data = ["text": customInputView.textView.text ?? "", "name": match.name, "profileImageUrl": match.profileImageUrl, "timestamp": Timestamp(date: Date()), "uid": match.uid] as [String : Any]
+        
+        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("recent_messages").document(match.uid).setData(data) { (error) in
+            if let error = error {
+                print("Failed to save recent message to Firestore:", error)
+                return
+            }
+            
+            print("Saved recent message")
+        }
+        
+        // Save to the other user
+        guard let currentUser = self.currentUser else { return }
+        let toData = ["text": customInputView.textView.text ?? "", "name": currentUser.name ?? "", "profileImageUrl": currentUser.imageUrl1 ?? "", "timestamp": Timestamp(date: Date()), "uid": currentUserId] as [String : Any]
+        
+        Firestore.firestore().collection("matches_messages").document(match.uid).collection("recent_messages").document(currentUserId).setData(toData) { (error) in
+            if let error = error {
+                print("Failed to save recent message to Firestore:", error)
+                return
+            }
+            
+            print("Saved recent message")
         }
     }
     
