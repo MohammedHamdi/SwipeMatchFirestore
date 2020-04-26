@@ -122,8 +122,6 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
     }
     
     @objc fileprivate func handleSend() {
-        print(customInputView.textView.text ?? "")
-        
         saveToFromMessages()
         saveToFromRecentMessages()
     }
@@ -142,7 +140,7 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
                 return
             }
             
-            print("Successfully saved message into firestore")
+//            print("Successfully saved message into firestore")
             self.customInputView.textView.text = nil
             self.customInputView.placeholderLabel.isHidden = false
         }
@@ -155,7 +153,7 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
                 return
             }
             
-            print("Successfully saved message into firestore")
+//            print("Successfully saved message into firestore")
             self.customInputView.textView.text = nil
             self.customInputView.placeholderLabel.isHidden = false
         }
@@ -172,7 +170,7 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
                 return
             }
             
-            print("Saved recent message")
+//            print("Saved recent message")
         }
         
         // Save to the other user
@@ -185,14 +183,14 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
                 return
             }
             
-            print("Saved recent message")
+//            print("Saved recent message")
         }
     }
     
     var listener: ListenerRegistration?
     
     fileprivate func fetchMessages() {
-        print("Fetching messages")
+//        print("Fetching messages")
         
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
         

@@ -54,7 +54,7 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
                 return
             }
             
-            print("Finished uploading image")
+//            print("Finished uploading image")
             ref.downloadURL { (url, error) in
                 hud.dismiss()
                 
@@ -63,7 +63,7 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
                     return
                 }
                 
-                print("Finished getting download url:", url?.absoluteString ?? "")
+//                print("Finished getting download url:", url?.absoluteString ?? "")
                 
                 if imageButton == self.image1Button {
                     self.user?.imageUrl1 = url?.absoluteString
@@ -331,9 +331,8 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
                 return
             }
             
-            print("Finished saving user info")
+//            print("Finished saving user info")
             self.dismiss(animated: true) {
-                print("Dismissal complete")
                 self.delegate?.didSaveSettings()
             }
         }

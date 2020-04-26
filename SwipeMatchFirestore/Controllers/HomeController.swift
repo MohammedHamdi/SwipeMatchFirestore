@@ -12,8 +12,6 @@ import JGProgressHUD
 
 class HomeController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate {
     
-//    var cardViewModels = [CardViewModel]()
-    
     var users = [String: User]()
     
     fileprivate var user: User?
@@ -37,8 +35,6 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         
         setupLayout()
         fetchCurrentUser()
-//        setupFirestoreUserCards()
-//        fetchUsersFromFirestore()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,16 +69,6 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         
         overallStackview.bringSubviewToFront(cardsDeckView)
     }
-    
-//    fileprivate func setupFirestoreUserCards() {
-//        cardViewModels.forEach { (cardViewModel) in
-//            let cardView = CardView()
-//            cardView.cardViewModel = cardViewModel
-//
-//            cardsDeckView.addSubview(cardView)
-//            cardView.fillSuperview()
-//        }
-//    }
     
     @objc func handleSettings() {
         let settingsController = SettingsController()
@@ -125,7 +111,6 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
                 return
             }
             
-            print("Swipes:", snapshot?.data() ?? "")
             guard let data = snapshot?.data() as? [String: Int] else {
                 self.fetchUsersFromFirestore()
                 return }
@@ -190,7 +175,6 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     }
     
     func didTapMoreInfo(cardViewModel: CardViewModel) {
-        print("Home controller:", cardViewModel.attributedString)
         let userDetailsController = UserDetailsController()
         userDetailsController.cardViewModel = cardViewModel
         userDetailsController.modalPresentationStyle = .fullScreen
@@ -233,7 +217,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
                         print("Failed to save swipe data:", error)
                         return
                     }
-                    print("Successfully updated swipe")
+//                    print("Successfully updated swipe")
                     if didLike == 1 {
                         self.checkIfMatchExists(cardUID: cardUID)
                     }
@@ -244,7 +228,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
                         print("Failed to save swipe data:", error)
                         return
                     }
-                    print("Successfully saved swipe")
+//                    print("Successfully saved swipe")
                     if didLike == 1 {
                         self.checkIfMatchExists(cardUID: cardUID)
                     }
@@ -254,7 +238,6 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     }
     
     fileprivate func checkIfMatchExists(cardUID: String) {
-        print("Detecting match")
         
         Firestore.firestore().collection("swipes").document(cardUID).getDocument { (snapshot, error) in
             if let error = error {
@@ -263,13 +246,11 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
             }
             
             guard let data = snapshot?.data() else { return }
-//            print(data)
             
             guard let uid = Auth.auth().currentUser?.uid else { return }
             
             let hasMatched = data[uid] as? Int == 1
             if hasMatched {
-                print("Has matched")
                 self.presentMatchView(cardUID: cardUID)
                 
                 guard let cardUser = self.users[cardUID] else { return }

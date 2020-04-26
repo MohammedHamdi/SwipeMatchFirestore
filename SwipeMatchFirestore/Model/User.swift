@@ -13,7 +13,6 @@ struct User: ProducesCardViewModel {
     var name: String?
     var age: Int?
     var profession: String?
-//    let imageNames: [String]
     var imageUrl1: String?
     var imageUrl2: String?
     var imageUrl3: String?

@@ -55,7 +55,6 @@ class RegistrationController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-//        button.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0.0, blue: 0.3254901961, alpha: 1)
         button.backgroundColor = .lightGray
         button.setTitleColor(.darkGray, for: .disabled)
         button.isEnabled = false
@@ -186,7 +185,7 @@ class RegistrationController: UIViewController {
     }
     
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
-//        print(notification.userInfo)
+
         guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardFrame = value.cgRectValue
         

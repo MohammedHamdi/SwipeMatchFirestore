@@ -24,8 +24,6 @@ class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, Rec
         
         fetchRecentMessages()
         
-        items = []
-        
         setupUI()
     }
     
@@ -38,7 +36,7 @@ class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, Rec
     }
     
     deinit {
-        print("Object deinit recent messages")
+//        print("Object deinit recent messages")
     }
     
     fileprivate func fetchRecentMessages() {
@@ -129,47 +127,5 @@ class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, Rec
         let match = Match(dictionary: dictionary)
         let controller = ChatLogController(match: match)
         navigationController?.pushViewController(controller, animated: true)
-    }
-}
-
-class RecentMessageCell: LBTAListCell<RecentMessage> {
-    
-    let userProfileImageView = UIImageView(image: #imageLiteral(resourceName: "pc2"), contentMode: .scaleAspectFill)
-    let usernameLabel = UILabel(text: "USERNAME HERE", font: .boldSystemFont(ofSize: 18))
-    let messageTextLabel = UILabel(text: "Some long line of text that should span 2 line", font: .systemFont(ofSize: 16), textColor: .gray, numberOfLines: 2)
-    
-    override var item: RecentMessage! {
-        didSet {
-            usernameLabel.text = item.name
-            messageTextLabel.text = item.text
-            userProfileImageView.sd_setImage(with: URL(string: item.profileImageUrl))
-        }
-    }
-    
-    override func setupViews() {
-        super.setupViews()
-        
-        userProfileImageView.layer.cornerRadius = 94 / 2
-        
-        hstack(userProfileImageView.withWidth(94).withHeight(94),
-               stack(usernameLabel, messageTextLabel, spacing: 2),
-            spacing: 20, alignment: .center).padLeft(20).padRight(20)
-        
-        addSeparatorView(leadingAnchor: usernameLabel.leadingAnchor)
-    }
-}
-
-
-struct RecentMessage {
-    let text, uid, name, profileImageUrl: String
-    let timestamp: Timestamp
-    
-    init(dictionary: [String: Any]) {
-        self.text = dictionary["text"] as? String ?? ""
-        self.uid = dictionary["uid"] as? String ?? ""
-        self.name = dictionary["name"] as? String ?? ""
-        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
-        
-        self.timestamp = dictionary["timestamp"] as? Timestamp ?? Timestamp(date: Date())
     }
 }

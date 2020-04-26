@@ -73,7 +73,7 @@ class LoginController: UIViewController {
                 return
             }
             
-            print("Logged in successfully")
+//            print("Logged in successfully")
             self.dismiss(animated: true) {
                 self.delegate?.didFinishLoggingIn()
             }

@@ -92,7 +92,6 @@ class MatchView: UIView {
         setupBlurView()
         
         setupLayout()
-//        setupAnimations()
     }
     
     required init?(coder: NSCoder) {

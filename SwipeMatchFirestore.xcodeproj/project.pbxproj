@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		094E97D55C43CCEF701D55B0 /* Pods_SwipeMatchFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A80F49EFBA6C3FF2E3DE384 /* Pods_SwipeMatchFirestore.framework */; };
 		6F07C1AF244B6E0D0014F918 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07C1AE244B6E0D0014F918 /* MatchView.swift */; };
 		6F07C1B1244C5B2B0014F918 /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07C1B0244C5B2B0014F918 /* SendMessageButton.swift */; };
 		6F07C1B3244C622F0014F918 /* KeepSwipingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07C1B2244C622F0014F918 /* KeepSwipingButton.swift */; };
@@ -30,6 +29,8 @@
 		6F4CA4A72444C59000A54EFC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CA4A62444C59000A54EFC /* LoginViewModel.swift */; };
 		6F515BC924530B3700D57177 /* MatchesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F515BC824530B3700D57177 /* MatchesHeader.swift */; };
 		6F515BCB24530B7A00D57177 /* MatchesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F515BCA24530B7A00D57177 /* MatchesHorizontalController.swift */; };
+		6F515BCD24547B8D00D57177 /* RecentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F515BCC24547B8D00D57177 /* RecentMessageCell.swift */; };
+		6F515BCF24547BC100D57177 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F515BCE24547BC100D57177 /* RecentMessage.swift */; };
 		6F526DA624461801001891CE /* UserDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F526DA524461801001891CE /* UserDetailsController.swift */; };
 		6F526DA824488A46001891CE /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F526DA724488A46001891CE /* SwipingPhotosController.swift */; };
 		6F526DAA2449DAE9001891CE /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F526DA92449DAE9001891CE /* PhotoController.swift */; };
@@ -48,6 +49,7 @@
 		6FA00F7A243B979400A5B2F1 /* Assets.xcassets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FA00F79243B979400A5B2F1 /* Assets.xcassets.xcassets */; };
 		6FA00F7C243CDCEF00A5B2F1 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA00F7B243CDCEF00A5B2F1 /* RegistrationController.swift */; };
 		6FED0CA6244DCC1C00E9293C /* MatchesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FED0CA5244DCC1C00E9293C /* MatchesNavBar.swift */; };
+		B894F5498BA16901D97B5184 /* libPods-SwipeMatchFirestore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E0D9B8CEB9D9ADB858228 /* libPods-SwipeMatchFirestore.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		6F4CA4A62444C59000A54EFC /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		6F515BC824530B3700D57177 /* MatchesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHeader.swift; sourceTree = "<group>"; };
 		6F515BCA24530B7A00D57177 /* MatchesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHorizontalController.swift; sourceTree = "<group>"; };
+		6F515BCC24547B8D00D57177 /* RecentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageCell.swift; sourceTree = "<group>"; };
+		6F515BCE24547BC100D57177 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		6F526DA524461801001891CE /* UserDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsController.swift; sourceTree = "<group>"; };
 		6F526DA724488A46001891CE /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		6F526DA92449DAE9001891CE /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
@@ -94,7 +98,7 @@
 		6FA00F79243B979400A5B2F1 /* Assets.xcassets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.xcassets; sourceTree = "<group>"; };
 		6FA00F7B243CDCEF00A5B2F1 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		6FED0CA5244DCC1C00E9293C /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
-		8A80F49EFBA6C3FF2E3DE384 /* Pods_SwipeMatchFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeMatchFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		831E0D9B8CEB9D9ADB858228 /* libPods-SwipeMatchFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwipeMatchFirestore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9BF123E8DEB97FD6E7A8303 /* Pods-SwipeMatchFirestore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchFirestore.release.xcconfig"; path = "Target Support Files/Pods-SwipeMatchFirestore/Pods-SwipeMatchFirestore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,7 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				094E97D55C43CCEF701D55B0 /* Pods_SwipeMatchFirestore.framework in Frameworks */,
+				B894F5498BA16901D97B5184 /* libPods-SwipeMatchFirestore.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +128,7 @@
 			children = (
 				6FED0CA5244DCC1C00E9293C /* MatchesNavBar.swift */,
 				6F28951B24508CAA0033957B /* MessagesNavBar.swift */,
+				6F515BCC24547B8D00D57177 /* RecentMessageCell.swift */,
 				6F2895232451FAD50033957B /* MatchCell.swift */,
 				6F28951D2451AFF50033957B /* MessageCell.swift */,
 				6F2895212451B8C40033957B /* CustomInputAccessoryView.swift */,
@@ -212,6 +217,7 @@
 				6FA00F77243B94F400A5B2F1 /* Advertiser.swift */,
 				6F2895252451FB0F0033957B /* Match.swift */,
 				6F28951F2451B02E0033957B /* Message.swift */,
+				6F515BCE24547BC100D57177 /* RecentMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -244,7 +250,7 @@
 		ED858A0016E4954C4FC7B79C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8A80F49EFBA6C3FF2E3DE384 /* Pods_SwipeMatchFirestore.framework */,
+				831E0D9B8CEB9D9ADB858228 /* libPods-SwipeMatchFirestore.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -260,7 +266,7 @@
 				6FA00F4B2438BDFA00A5B2F1 /* Sources */,
 				6FA00F4C2438BDFA00A5B2F1 /* Frameworks */,
 				6FA00F4D2438BDFA00A5B2F1 /* Resources */,
-				8672E23A7EE7EF008DA36478 /* [CP] Embed Pods Frameworks */,
+				0F74FD5C65E050EAEC397BF9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -319,21 +325,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8672E23A7EE7EF008DA36478 /* [CP] Embed Pods Frameworks */ = {
+		0F74FD5C65E050EAEC397BF9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SwipeMatchFirestore/Pods-SwipeMatchFirestore-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-SwipeMatchFirestore/Pods-SwipeMatchFirestore-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SwipeMatchFirestore/Pods-SwipeMatchFirestore-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-SwipeMatchFirestore/Pods-SwipeMatchFirestore-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwipeMatchFirestore/Pods-SwipeMatchFirestore-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwipeMatchFirestore/Pods-SwipeMatchFirestore-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E10ED6B66ED7853CEEC63DAF /* [CP] Check Pods Manifest.lock */ = {
@@ -387,6 +393,7 @@
 				6FA00F7C243CDCEF00A5B2F1 /* RegistrationController.swift in Sources */,
 				6FA00F72243B5C9C00A5B2F1 /* User.swift in Sources */,
 				6F4CA49B243E28F400A54EFC /* Bindable.swift in Sources */,
+				6F515BCF24547BC100D57177 /* RecentMessage.swift in Sources */,
 				6F2895202451B02E0033957B /* Message.swift in Sources */,
 				6FA00F6D243A163700A5B2F1 /* TopNavigationStackView.swift in Sources */,
 				6F15140E243CE3A900261221 /* CustomTextField.swift in Sources */,
@@ -400,6 +407,7 @@
 				6FA00F76243B858600A5B2F1 /* CardViewModel.swift in Sources */,
 				6F2895242451FAD50033957B /* MatchCell.swift in Sources */,
 				6F28951C24508CAA0033957B /* MessagesNavBar.swift in Sources */,
+				6F515BCD24547B8D00D57177 /* RecentMessageCell.swift in Sources */,
 				6F7EEB5F244DC3B5006CD41F /* MatchesMessagesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

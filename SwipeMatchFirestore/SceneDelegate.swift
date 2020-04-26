@@ -23,9 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         FirebaseApp.configure()
         
-//        window = UIWindow()
-//        window?.rootViewController = HomeController()
-//        window?.makeKeyAndVisible()
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UINavigationController(rootViewController: HomeController())
