@@ -1,0 +1,6 @@
+module Pods_SwipeMatchFirestore {
+  umbrella header "Pods-SwipeMatchFirestore-umbrella.h"
+
+  export *
+  module * { export * }
+}
