@@ -1,6 +1,7 @@
 # SwipeMatchFirestore
 * An iOS app that clone the functionality of apps like tinder using firestore as backend.
 * The user can view other users in the form of cards and can show interset by swiping on these cards.
+* The app is done using MVVM.
 
 
 ## Features
