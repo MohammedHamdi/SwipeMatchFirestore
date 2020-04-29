@@ -149,7 +149,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
                 self.users[user.uid ?? ""] = user
                 
                 let isNotCurrentUser = user.uid != Auth.auth().currentUser?.uid
-                let hasNotSwippedBefore = /*self.swipes[user.uid!] == nil*/true
+                let hasNotSwippedBefore = self.swipes[user.uid!] == nil//true
                 if  isNotCurrentUser && hasNotSwippedBefore {
                     let cardView = self.setupCardFromUser(user: user)
                     
